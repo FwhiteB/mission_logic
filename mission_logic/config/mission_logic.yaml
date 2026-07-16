@@ -1,0 +1,58 @@
+mission_node:
+  ros__parameters:
+    step_x: 1.0
+    step_y: 0.0
+    magnetic_y_gain: 0.5
+    max_lateral_step: 1.0
+    workspace_min_x: -12.0
+    workspace_max_x: 12.0
+    workspace_min_y: 0.0
+    workspace_max_y: 24.0
+    detect_threshold: 0.2
+    loss_threshold: 0.08
+    center_magnetic_z_threshold: 0.2
+    search_probe_distance: 1.2
+    centering_step: 0.5
+    forward_step: 1.2
+    reacquire_probe_offset: 0.4
+    follow_heading_degrees: 0.0
+    orientation_check_interval: 3
+    arrival_tolerance_distance: 0.22
+    arrival_tolerance_yaw_degree: 10.0
+    speed: 1.5
+    goal_frame: map
+    goal_republish_period: 1.0
+    max_steps: 500
+    close_threshold: 1.0
+    repeat_count_threshold: 4
+    memory_readings_capacity: 5
+    receiver_robot_dx: 1.0
+    receiver_robot_dy: 0.0
+    receiver_robot_same_direction: True
+
+magnetic_field_node:
+  ros__parameters:
+    pipeline_config_file: ""
+    model_type: simple
+    pipeline_name: straight_wire
+    pipeline_points:
+      - -1000.0
+      - 0.0
+      - -1.0
+      - 1000.0
+      - 0.0
+      - -1.0
+    source_strength: 1.0
+    background: 0.0
+    distance_floor: 0.1
+    attenuation_power: 2.0
+    current_scale: 100.0
+    signal_scale: 2000000.0
+    singularity_floor: 0.05
+    twoarrows_threshold: 0.99
+    compass_depth_and_currunt_and_onearrow_threshold: 0.85
+    heading_degrees_threshold: 32.0
+    receiver_robot_dx: 1.0
+    receiver_robot_dy: 0.0
+    receiver_robot_same_direction: True
+    
