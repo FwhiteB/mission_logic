@@ -7,6 +7,7 @@ from typing import Optional
 from dataclasses import field
 from mission_logic.geometry import Point3D
 from collections import deque
+import copy
 
 
 class MissionState(str, Enum):
@@ -110,6 +111,12 @@ class LineMeasurementTrack:
 
     def centered_points(self) -> list[LineMeasurementPoint]:
         return [point for point in self.points if point.centered]
+
+    def print_track(self):
+        return self.points
+
+    def get_last_point(self):
+        return self.points.pop() if self.points else None
 
 @dataclass(frozen=True)
 class RobotState:

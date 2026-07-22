@@ -4,10 +4,10 @@ mission_node:
     step_y: 0.0
     magnetic_y_gain: 0.5
     max_lateral_step: 1.0
-    workspace_min_x: -12.0
-    workspace_max_x: 12.0
-    workspace_min_y: 0.0
-    workspace_max_y: 24.0
+    workspace_min_x: -3.0
+    workspace_max_x: 8.0
+    workspace_min_y: -3.0
+    workspace_max_y: 10.0
     detect_threshold: 0.2
     loss_threshold: 0.08
     center_magnetic_z_threshold: 0.2
@@ -24,11 +24,13 @@ mission_node:
     goal_republish_period: 1.0
     max_steps: 500
     close_threshold: 1.0
-    repeat_count_threshold: 4
+    repeat_count_threshold: 5
     memory_readings_capacity: 5
-    receiver_robot_dx: 1.0
+    receiver_robot_dx: 0.0
     receiver_robot_dy: 0.0
     receiver_robot_same_direction: True
+    debug_publish_period: 1.0
+    debug_mode: False
 
 magnetic_field_node:
   ros__parameters:
@@ -52,7 +54,7 @@ magnetic_field_node:
     twoarrows_threshold: 0.99
     compass_depth_and_currunt_and_onearrow_threshold: 0.85
     heading_degrees_threshold: 32.0
-    receiver_robot_dx: 1.0
+    receiver_robot_dx: 0.0
     receiver_robot_dy: 0.0
     receiver_robot_same_direction: True
     

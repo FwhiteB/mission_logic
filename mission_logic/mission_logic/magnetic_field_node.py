@@ -98,7 +98,7 @@ class MagneticFieldNode(Node):
         magnetic_field_msg.magnetic_field.y = field_vector.y
         magnetic_field_msg.magnetic_field.z = field_vector.z
         magnetic_field_msg.magnetic_field_covariance = [0.0] * 9
-        # magnetic_field_msg.signal_strength = math.abs(field_vector.y)
+        # magnetic_field_msg.signal_strength_percent = math.abs(field_vector.y)
         nearest_pipeline = measurement.nearest_pipeline
         if nearest_pipeline is not None:
             nearest_depth = measurement.true_depth
@@ -147,7 +147,7 @@ class MagneticFieldNode(Node):
         field_y = field_vector.y * math.cos(yaw) - field_vector.x * math.sin(yaw)
         field_x = field_vector.y * math.sin(yaw) + field_vector.x * math.cos(yaw)
         field = Point3D(field_x, field_y, 0.0)
-        magnetic_field_msg.signal_strength = field.y if field.y > 0 else 0.0 # notice！: 这样修改会不会导致探测器朝向前后无法区分！？
+        magnetic_field_msg.signal_strength_percent = abs(field.y) 
 
         receiver_pose = RobotPose(receiver_x, receiver_y, position.z, yaw)
         self.publish_receiver_marker(receiver_pose=receiver_pose)
@@ -327,19 +327,19 @@ class MagneticFieldNode(Node):
             return measurement.magnetic_field
 
         if measurement.nearest_point is None or measurement.nearest_pipeline is None:
-            return Point3D(0.0, 0.0, measurement.signal_strength)
+            return Point3D(0.0, 0.0, measurement.signal_strength_percent)
 
         pipeline = self._pipeline_by_name(measurement.nearest_pipeline)
         if pipeline is None:
-            return Point3D(0.0, 0.0, measurement.signal_strength)
+            return Point3D(0.0, 0.0, measurement.signal_strength_percent)
 
         nearest_point, tangent = pipeline.closest_projection(position)
         radius = position - nearest_point
         direction = tangent.cross(radius)
         direction_norm = direction.norm()
         if direction_norm == 0.0:
-            return Point3D(0.0, 0.0, measurement.signal_strength)
-        return direction.scale(measurement.signal_strength / direction_norm)
+            return Point3D(0.0, 0.0, measurement.signal_strength_percent)
+        return direction.scale(measurement.signal_strength_percent / direction_norm)
 
     def _pipeline_by_name(self, name):
         for pipeline in self.field_model.pipelines:
