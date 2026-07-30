@@ -122,8 +122,8 @@ class Robot:
         receiver_yaw = pose.yaw if self.receiver_robot_same_direction else (pose.yaw + math.pi) % (2 * math.pi)
         rr_distance = math.hypot(self.receiver_robot_dx, self.receiver_robot_dy)
         rr_yaw = math.atan2(self.receiver_robot_dy, self.receiver_robot_dx)
-        receiver_x = pose.x + rr_distance * math.cos(robot_yaw + rr_yaw)
-        receiver_y = pose.y + rr_distance * math.sin(robot_yaw + rr_yaw)
+        receiver_x = pose.x + rr_distance * math.cos(pose.yaw + rr_yaw)
+        receiver_y = pose.y + rr_distance * math.sin(pose.yaw + rr_yaw)
         return RobotPose(x=receiver_x, y=receiver_y, z=pose.z, yaw=receiver_yaw)
 
     def receiver_move_to(self, x, y, yaw): # notice: 想加强的话甚至可以加一个角度差receiver_robot_dyaw。另外表述有点啰嗦，之后可以改一下
