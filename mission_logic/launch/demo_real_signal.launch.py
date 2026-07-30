@@ -24,7 +24,7 @@ def generate_launch_description():
     )
     declare_state_estimation_topic = DeclareLaunchArgument(
         'state_estimation_topic',
-        default_value='/state_estimation',
+        default_value='/slam_odom',
         description='Odometry topic provided by the robot dog.',
     )
     declare_magnetic_field_topic = DeclareLaunchArgument(
